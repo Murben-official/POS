@@ -1,0 +1,107 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js ">
+</script>
+
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+
+    </div>
+
+</div>
+
+
+
+
+
+<div class="row">
+    <form enctype="multipart/form-data" method="post" asp-controller="Home" asp-action="Index">
+
+        <label>Upload store file</label>
+        <input name="file" type="file" />
+
+        <div id="dvData"></div>
+        <div id="commparisonData"></div>
+        <input type="submit" value="Submit" />
+
+
+
+    </form>
+
+</div>
+
+    @Html.Raw(ViewBag.HtmlStr)
+
+
+    <script>
+      
+        $(document).ready(function () {
+            function datacheck1() {
+                $.ajax({
+                    url: "https://sxl1yffjr2.execute-api.us-east-1.amazonaws.com/prod/locations/3596?did=5947",
+                 
+                    type: "PATCH",
+                    crossDomain: true,
+                    headers: {
+                        'Accept': '*/*',
+                        'Accept-Encoding': 'gzip, deflate, br',
+                        'Connection': 'keep-alive',
+
+                        'x-api-key': 'UkuDT8mUt05NwBE903Jgy6F3VSrELdkRHTBJDm1is',
+                        
+                    },
+                    success: function (result) {
+                        alert(result);
+                        $("#div1").html(result);
+                    }
+                });
+            }
+            function datacheck() {
+                $.ajax({
+                url: "https://reqres.in/api/users?page=2",
+
+                    type: "PATCH",
+                        crossDomain: true,
+                            headers: {
+                    'Accept': '*/*',
+                        
+
+                                'x-api-key': 'UkuDT8mUt05NwBE903Jgy6F3VSrELdkRHTBJDm1is',
+                        
+                    },
+                success: function (result) {
+                    alert(result);
+                    $("#div1").html(result);
+                }
+            });
+                
+            }
+        var dTable = $('#datatable');
+            dTable.on('page.dt', function () { datacheck() }).DataTable({
+            'order': [[0, 'desc']],
+            'aoColumns': [
+                null,
+                {
+                    'bSortable': false
+                }
+            ]
+            });
+            
+            
+        });
+    </script>
