@@ -8,6 +8,6 @@ namespace RioSync.Models
 {
     public class FormModel
     {
-        public IFormFile file { get; set; }
+        public IFormFile file { get; set; } 
     }
 }
